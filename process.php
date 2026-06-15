@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':inspection_date' => $inspection_date
         ]);
 
-        echo "<script>alert('Data berhasil disimpan ke database!'); window.location.href='index.php';</script>";
+        echo "<script>alert('Data berhasil disimpan ke database!'); window.location.href='index.php?page=form';</script>";
     } catch (PDOException $e) {
         die("Error saat menyimpan data: " . $e->getMessage());
     }
