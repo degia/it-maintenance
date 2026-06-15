@@ -13,6 +13,18 @@ $page_title_map = [
     'sites'       => 'Database Sites',
 ];
 
+$page_path_map = [
+    'home'        => __DIR__ . '/pages/home.php',
+    'form'        => __DIR__ . '/pages/form.php',
+    'preventive'  => __DIR__ . '/pages/maintenance/preventive.php',
+    'corrective'  => __DIR__ . '/pages/maintenance/corrective.php',
+    'predictive'  => __DIR__ . '/pages/maintenance/predictive.php',
+    'report'      => __DIR__ . '/pages/report_maintenance.php',
+    'user'        => __DIR__ . '/pages/database/user.php',
+    'assets'      => __DIR__ . '/pages/database/assets.php',
+    'sites'       => __DIR__ . '/pages/database/sites.php',
+];
+
 $title = $page_title_map[$page] ?? 'Dashboard';
 ?>
 <!DOCTYPE html>
@@ -44,7 +56,7 @@ $title = $page_title_map[$page] ?? 'Dashboard';
 
             <div class="content-area">
                 <?php
-                $page_path = __DIR__ . '/pages/' . $page . '.php';
+                $page_path = $page_path_map[$page] ?? (__DIR__ . '/pages/' . $page . '.php');
                 if (file_exists($page_path)) {
                     include $page_path;
                 } else {
