@@ -1,107 +1,40 @@
+<?php
+require_once __DIR__ . '/../../db.php';
+$data = $pdo->query("SELECT * FROM site ORDER BY id_site ASC")->fetchAll();
+$total = $pdo->query("SELECT COUNT(*) FROM site")->fetchColumn();
+?>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div>
         <h5 class="section-title" style="border:none;margin:0;">Data Sites</h5>
+        <p class="text-muted mb-0">Total: <?= $total ?> records</p>
     </div>
-    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalSite">+ Tambah Site</button>
+    <div>
+        <a href="?page=settings_site" class="btn btn-outline-primary btn-sm">&#9881; Kelola Site</a>
+    </div>
 </div>
-
 <div class="form-section">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kode Site</th>
-                <th>Nama Site</th>
-                <th>Alamat</th>
-                <th>Kota</th>
-                <th>Provinsi</th>
-                <th>Kontak</th>
-                <th>Aksi</th>
-            </tr>
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover table-sm align-middle">
+        <thead class="table-secondary">
+            <tr><th>No</th><th>Kode</th><th>Nama Site</th><th>Business Unit</th><th>Kota</th><th>Provinsi</th><th>Alamat</th></tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>PIK</td>
-                <td>PIK Avenue</td>
-                <td>Jl. Pantai Indah Kapuk</td>
-                <td>Jakarta Utara</td>
-                <td>DKI Jakarta</td>
-                <td>021-1234567</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-warning">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger">Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>BSD</td>
-                <td>BSD Green Office Park</td>
-                <td>Jl. BSD Raya</td>
-                <td>Tangerang Selatan</td>
-                <td>Banten</td>
-                <td>021-7654321</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-warning">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger">Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>KNO</td>
-                <td>Kuningan Office</td>
-                <td>Jl. HR Rasuna Said</td>
-                <td>Jakarta Selatan</td>
-                <td>DKI Jakarta</td>
-                <td>021-5555555</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-warning">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger">Hapus</button>
-                </td>
-            </tr>
+            <?php if (empty($data)): ?>
+            <tr><td colspan="7" class="text-center text-muted">Belum ada data.</td></tr>
+            <?php else: ?>
+                <?php foreach ($data as $i => $r): ?>
+                <tr>
+                    <td><?= $i + 1 ?></td>
+                    <td><?= htmlspecialchars($r['id_site']) ?></td>
+                    <td><?= htmlspecialchars($r['site']) ?></td>
+                    <td><?= htmlspecialchars($r['business_unit']) ?></td>
+                    <td><?= htmlspecialchars($r['city']) ?></td>
+                    <td><?= htmlspecialchars($r['provincy']) ?></td>
+                    <td><?= htmlspecialchars(mb_substr($r['address'] ?? '', 0, 60)) ?></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
-</div>
-
-<div class="modal fade" id="modalSite" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Site</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label class="form-label">Kode Site</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nama Site</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Alamat</label>
-                        <textarea class="form-control" rows="2"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Kota</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Provinsi</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Kontak</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
-            </div>
-        </div>
     </div>
 </div>

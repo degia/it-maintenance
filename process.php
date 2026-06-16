@@ -1,4 +1,7 @@
 <?php
+require_once 'includes/auth.php';
+require_login();
+
 require 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

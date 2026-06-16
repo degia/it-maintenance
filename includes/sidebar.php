@@ -1,5 +1,6 @@
 <?php
 $current_page = $_GET['page'] ?? 'home';
+$role = get_role();
 ?>
 <div class="sidebar">
     <div class="sidebar-header">
@@ -13,11 +14,13 @@ $current_page = $_GET['page'] ?? 'home';
                 <span class="icon">&#8962;</span> Home
             </a>
         </li>
+        <?php if ($role !== 'Viewer'): ?>
         <li class="nav-item">
             <a href="?page=form" class="nav-link <?= $current_page === 'form' ? 'active' : '' ?>">
                 <span class="icon">&#9998;</span> Form Pemeriksaan
             </a>
         </li>
+        <?php endif; ?>
 
         <li class="menu-label">Maintenance</li>
         <li class="nav-item">
@@ -47,12 +50,15 @@ $current_page = $_GET['page'] ?? 'home';
                 </ul>
             </div>
         </li>
+        <?php if ($role !== 'User'): ?>
         <li class="nav-item">
             <a href="?page=report" class="nav-link <?= $current_page === 'report' ? 'active' : '' ?>">
                 <span class="icon">&#128202;</span> Report Maintenance
             </a>
         </li>
+        <?php endif; ?>
 
+        <?php if (in_array($role, ['Administrator', 'Technician'])): ?>
         <li class="menu-label">Database</li>
         <li class="nav-item">
             <a class="nav-link <?= in_array($current_page, ['user', 'assets', 'sites']) ? 'active' : '' ?>"
@@ -81,5 +87,21 @@ $current_page = $_GET['page'] ?? 'home';
                 </ul>
             </div>
         </li>
+        <?php endif; ?>
+
+        <?php if (in_array($role, ['Administrator', 'Technician'])): ?>
+        <li class="menu-label">Settings</li>
+        <li class="nav-item">
+            <a href="?page=settings" class="nav-link <?= $current_page === 'settings' || strpos($current_page, 'settings_') === 0 ? 'active' : '' ?>">
+                <span class="icon">&#9881;</span> Database Settings
+            </a>
+        </li>
+        <?php endif; ?>
     </ul>
+
+    <div class="sidebar-footer p-3 border-top border-light border-opacity-10">
+        <a href="logout.php" class="nav-link d-flex align-items-center gap-2" style="color:#94a3b8;font-size:0.85rem;">
+            <span>&#10149;</span> Logout
+        </a>
+    </div>
 </div>

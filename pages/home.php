@@ -1,5 +1,5 @@
 <div class="welcome-section">
-    <h2>Selamat Datang di IT Maintenance System</h2>
+    <h2>Selamat Datang, <?= htmlspecialchars(get_full_name()) ?></h2>
     <p>Sistem manajemen pemeliharaan perangkat IT untuk monitoring, pelaporan, dan pengelolaan aset.</p>
 </div>
 

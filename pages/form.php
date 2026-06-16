@@ -1,3 +1,4 @@
+<?php $inspector = get_full_name(); ?>
 <form action="process.php" method="POST">
     <div class="form-section">
         <h5 class="section-title">Informasi Pengguna</h5>
@@ -178,8 +179,8 @@
                 placeholder="Masukkan catatan atau rekomendasi" rows="3">Direkomendasikan: Asset akan digunakan Oleh Regil Yanwar Fadilah. Engineering Staff. Pengecekan untuk EXIT CLEARANCE.</textarea>
         </div>
         <div class="row g-3">
-            <div class="col-md-4"><label class="form-label">Diperiksa Oleh (IT Staff)</label><input type="text"
-                    name="inspector_name" class="form-control" value="Fransiskus Simson"></div>
+                    <div class="col-md-4"><label class="form-label">Diperiksa Oleh (IT Staff)</label><input type="text"
+                            name="inspector_name" class="form-control" value="<?= htmlspecialchars($inspector) ?>"></div>
             <div class="col-md-4"><label class="form-label">Diketahui Oleh (Manager)</label><input type="text"
                     name="manager_name" class="form-control" value="Nurcahyo Setyo Utomo"></div>
             <div class="col-md-4"><label class="form-label">Disetujui Oleh (SPV)</label><input type="text"
