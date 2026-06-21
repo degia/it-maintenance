@@ -21,13 +21,13 @@ Sistem manajemen pemeliharaan perangkat IT berbasis web dengan fitur CRUD master
 
 ## Tech Stack
 
-| Komponen | Teknologi |
-|----------|-----------|
-| Backend | PHP 8.2 (Procedural, no framework) |
-| Database | MySQL (MariaDB) via PDO |
-| Frontend | Bootstrap 5.3, Custom CSS |
-| Export | Native PHP (CSV, HTML, XLS), SimpleXLSX (XLSX), SimplePDF (PDF) |
-| Seeding | Parsing `.xlsx` via ZipArchive + SimpleXML |
+| Komponen | Teknologi                                                       |
+| -------- | --------------------------------------------------------------- |
+| Backend  | PHP 8.2 (Procedural, no framework)                              |
+| Database | MySQL (MariaDB) via PDO                                         |
+| Frontend | Bootstrap 5.3, Custom CSS                                       |
+| Export   | Native PHP (CSV, HTML, XLS), SimpleXLSX (XLSX), SimplePDF (PDF) |
+| Seeding  | Parsing `.xlsx` via ZipArchive + SimpleXML                      |
 
 ---
 
@@ -75,25 +75,25 @@ Buka browser: `http://localhost/project/it-maintenance/login.php`
 
 ## Demo Credentials
 
-| Role | Username | Password |
-|------|----------|----------|
-| Administrator | `admin` | `admin123` |
-| Technician | `teknisi` | `teknisi123` |
-| Viewer | `viewer` | `viewer123` |
-| User | `user` | `user123` |
+| Role          | Username  | Password     |
+| ------------- | --------- | ------------ |
+| Administrator | `admin`   | `admin123`   |
+| Technician    | `teknisi` | `teknisi123` |
+| Viewer        | `viewer`  | `viewer123`  |
+| User          | `user`    | `user123`    |
 
 ---
 
 ## Role & Hak Akses
 
-| Menu | Admin | Teknisi | Viewer | User |
-|------|-------|---------|--------|------|
-| Home (Dashboard) | ✔ | ✔ | ✔ | ✔ |
-| Form Pemeriksaan | ✔ | ✔ | ✘ | ✔ |
-| Maintenance (Preventive, Corrective, Predictive) | ✔ | ✔ | ✔ | ✔ |
-| Report Maintenance | ✔ | ✔ | ✘ | ✔ |
-| Database (User, Assets, Sites) | ✔ | ✔ | ✘ | ✘ |
-| Database Settings (CRUD master data) | ✔ | ✔ | ✘ | ✘ |
+| Menu                                             | Admin | Teknisi | Viewer | User |
+| ------------------------------------------------ | ----- | ------- | ------ | ---- |
+| Home (Dashboard)                                 | ✔     | ✔       | ✔      | ✔    |
+| Form Pemeriksaan                                 | ✔     | ✔       | ✘      | ✔    |
+| Maintenance (Preventive, Corrective, Predictive) | ✔     | ✔       | ✔      | ✔    |
+| Report Maintenance                               | ✔     | ✔       | ✘      | ✔    |
+| Database (User, Assets, Sites)                   | ✔     | ✔       | ✘      | ✘    |
+| Database Settings (CRUD master data)             | ✔     | ✔       | ✘      | ✘    |
 
 ---
 
@@ -145,31 +145,31 @@ it-maintenance/
 
 ### Reference / Master Tables
 
-| # | Tabel | Primary Key | Deskripsi |
-|---|-------|-------------|-----------|
-| 1 | `level` | `code` | Level jabatan |
-| 2 | `directorate` | `code` | Direktorat |
-| 3 | `division` | `code` | Divisi |
-| 4 | `department` | `code` | Departemen |
-| 5 | `sub_department` | `code` | Sub departemen (relasi ke dept/div/dir) |
-| 6 | `business_unit` | `code` | Business unit |
-| 7 | `corp` | `code` | Perusahaan |
-| 8 | `item` | `code_item` | Kategori asset |
-| 9 | `site` | `id_site` | Lokasi/site |
-| 10 | `employee` | `nip` | Data karyawan |
-| 11 | `email` | `email` | Akun email |
-| 12 | `ad` | `username` | Active Directory (relasi ke employee via `pic_nip`) |
+| #   | Tabel            | Primary Key | Deskripsi                                           |
+| --- | ---------------- | ----------- | --------------------------------------------------- |
+| 1   | `level`          | `code`      | Level jabatan                                       |
+| 2   | `directorate`    | `code`      | Direktorat                                          |
+| 3   | `division`       | `code`      | Divisi                                              |
+| 4   | `department`     | `code`      | Departemen                                          |
+| 5   | `sub_department` | `code`      | Sub departemen (relasi ke dept/div/dir)             |
+| 6   | `business_unit`  | `code`      | Business unit                                       |
+| 7   | `corp`           | `code`      | Perusahaan                                          |
+| 8   | `item`           | `code_item` | Kategori asset                                      |
+| 9   | `site`           | `id_site`   | Lokasi/site                                         |
+| 10  | `employee`       | `nip`       | Data karyawan                                       |
+| 11  | `email`          | `email`     | Akun email                                          |
+| 12  | `ad`             | `username`  | Active Directory (relasi ke employee via `pic_nip`) |
 
 ### Operational Tables
 
-| # | Tabel | Primary Key | Deskripsi |
-|---|-------|-------------|-----------|
-| 13 | `workstation` | `id_asset` | Inventaris perangkat |
-| 14 | `q_ws` | `id` (auto) | Definisi kolom workstation |
-| 15 | `me` | `id_maintenance` | Tipe maintenance |
-| 16 | `task` | `id_task` | Jadwal task maintenance |
-| 17 | `wh` | `id_wh` | Status warehouse |
-| 18 | `am` | `barcode` | Manajemen asset (PR/PO) |
+| #   | Tabel         | Primary Key      | Deskripsi                  |
+| --- | ------------- | ---------------- | -------------------------- |
+| 13  | `workstation` | `id_asset`       | Inventaris perangkat       |
+| 14  | `q_ws`        | `id` (auto)      | Definisi kolom workstation |
+| 15  | `me`          | `id_maintenance` | Tipe maintenance           |
+| 16  | `task`        | `id_task`        | Jadwal task maintenance    |
+| 17  | `wh`          | `id_wh`          | Status warehouse           |
+| 18  | `am`          | `barcode`        | Manajemen asset (PR/PO)    |
 
 ### Foreign Key Relationships
 
@@ -219,13 +219,13 @@ Setiap tabel master dapat dikelola melalui menu **Database Settings**:
 
 ### Export
 
-| Format | File Extension | Implementasi |
-|--------|---------------|--------------|
-| CSV | `.csv` | Native PHP (BOM UTF-8 untuk Excel) |
-| XLSX | `.xlsx` | SimpleXLSX (ZipArchive + XMLWriter) |
-| XLS | `.xls` | HTML table dengan header MSO Excel |
-| HTML | `.html` | HTML table standar |
-| PDF | `.pdf` | SimplePDF (native PDF spec, library-free) |
+| Format | File Extension | Implementasi                              |
+| ------ | -------------- | ----------------------------------------- |
+| CSV    | `.csv`         | Native PHP (BOM UTF-8 untuk Excel)        |
+| XLSX   | `.xlsx`        | SimpleXLSX (ZipArchive + XMLWriter)       |
+| XLS    | `.xls`         | HTML table dengan header MSO Excel        |
+| HTML   | `.html`        | HTML table standar                        |
+| PDF    | `.pdf`         | SimplePDF (native PDF spec, library-free) |
 
 ---
 
