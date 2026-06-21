@@ -243,7 +243,7 @@ $searchQuery = htmlspecialchars($search);
                     <?php endforeach; ?>
                     <td>
                         <button class="btn btn-sm btn-outline-warning me-1" title="Edit"
-                            onclick='editRow(<?= htmlspecialchars(json_encode($row)) ?>, <?= htmlspecialchars(json_encode($columns)) ?>)'>
+                            onclick='editRow(<?= htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8') ?>, <?= htmlspecialchars(json_encode($columns), ENT_QUOTES, 'UTF-8') ?>)'>
                             &#9998;
                         </button>
                         <form method="POST" action="process_settings.php" style="display:inline" onsubmit="return confirm('Hapus data ini?')">
@@ -356,6 +356,8 @@ $searchQuery = htmlspecialchars($search);
 </div>
 
 <script>
+const fkFields = <?= json_encode(array_keys($fk_cols)) ?>;
+
 function editRow(row, columns) {
     const pkCol = '<?= $pk_col ?>';
     document.getElementById('edit_pk_val').value = row[pkCol] || '';
@@ -368,14 +370,14 @@ function editRow(row, columns) {
 
         const val = row[field] || '';
         const isRequired = col.Null === 'NO';
-        const isFK = <?= json_encode(isset($fk_cols) ? 'true' : 'false') ?> && <?= json_encode(array_keys($fk_cols)) ?>.includes(field);
+        const isFK = fkFields.includes(field);
         const isText = col.Type.toLowerCase().includes('text');
         const isEnum = col.Type.toLowerCase().includes('enum');
         const isDate = col.Type.toLowerCase().includes('date');
         const isNumber = col.Type.toLowerCase().includes('decimal') || col.Type.toLowerCase().includes('int');
 
         html += '<div class="col-md-6">';
-        html += '<label class="form-label">' + field + (isRequired ? ' <span class="text-danger">*</span>' : '') + '</label>';
+        html += '<label class="form-label">' + escapeHtml(field) + (isRequired ? ' <span class="text-danger">*</span>' : '') + '</label>';
 
         if (isFK) {
             html += '<select name="' + field + '" class="form-select">';
@@ -384,7 +386,7 @@ function editRow(row, columns) {
             if (select) {
                 for (const opt of select.options) {
                     const sel = opt.value === val ? 'selected' : '';
-                    html += '<option value="' + opt.value + '" ' + sel + '>' + opt.text + '</option>';
+                    html += '<option value="' + escapeHtml(opt.value) + '" ' + sel + '>' + escapeHtml(opt.text) + '</option>';
                 }
             }
             html += '</select>';
@@ -396,7 +398,7 @@ function editRow(row, columns) {
                 for (const m of match) {
                     const opt = m.replace(/'/g, '');
                     const sel = opt === val ? 'selected' : '';
-                    html += '<option value="' + opt + '" ' + sel + '>' + opt + '</option>';
+                    html += '<option value="' + escapeHtml(opt) + '" ' + sel + '>' + escapeHtml(opt) + '</option>';
                 }
             }
             html += '</select>';
